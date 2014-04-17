@@ -98,3 +98,13 @@ TEMPLATE_LOADERS = (
 STATIC_ROOT= os.path.join(BASE_DIR,'static/')
 
 STATIC_URL = '/static/'
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+MEDIA_URL = '/media/'
+SITE_ID = 1
+LOGIN_URL = '/rango/login/'
+

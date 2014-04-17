@@ -1,24 +1,56 @@
+{% extends 'rango/base.html' %}
+
 <!DOCTYPE html>
+
+
 <html>
     <head>
         <title>Rango</title>
     </head>
 
     <body>
-        <h1>Rango says..hello world!</h1>
-        {% block content %}
+     {% block body_block %}
+     
+   <div class="hero-unit">
+    <h1>Ready to Rango</h1>
+    <p>Find, Add, Share and Rango useful links and resources.</p>
+</div>
 
+<div class="row-fluid">
+    <div class="span6">
+        <h2>Top Five Categories</h2>
         {% if categories %}
-            <ul>
-                {% for category in categories %}
-                <!-- Following line changed to add an HTML hyperlink -->
-                <li><a href="/rango/category/{{ category.url }}">{{ category.name }}</a></li>
-                {% endfor %}
-            </ul>
-       {% else %}
-            <strong>There are no categories present.</strong>
-       {% endif %}
+        <ul>
+            {% for category in categories %}
+            <li><a href="/rango/category/{{ category.url }}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <strong>No categories at present.</strong>
+        {% endif %}
+
+    </div>
+    <!--/span-->
+    <div class="span6">
+        <h2>Top Five Pages</h2>
+        {% if pages %}
+        <ul>
+            {% for page in pages %}
+            <li><a href="{{ page.url}}">{{ page.title }}</a> - {{ page.category }} ({{ page.views }} view(s))</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <strong>No pages at present.</strong>
+        {% endif %}
+
+    </div>
+    <!--/span-->
+</div>
+<!--/row-->
        {% endblock %}
+<a href="/rango/about/">About</a><br/>     
 <a href="/rango/add_category/">Add a New Category</a>
+
+
     </body>
 </html>
