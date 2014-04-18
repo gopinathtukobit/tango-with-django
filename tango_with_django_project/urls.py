@@ -16,8 +16,11 @@ urlpatterns = patterns('',
 	url(r'^rango/login/$', views.user_login, name='login'),
 	url(r'^rango/restricted/', views.restricted, name='restricted'),
 	url(r'^rango/logout/$', views.user_logout, name='logout'),
-	url(r'^rango/search/$',views.search, name='search'),
+#	url(r'^rango/search/$',views.search, name='search'),
 	url(r'^rango/profile/$', views.profile, name='profile'),
+	url(r'^rango/goto/$', views.track_url, name='track_url'),
+
+
 
 
 

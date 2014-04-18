@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response , redirect
 from django.template import RequestContext
 from django.http import HttpResponse ,HttpResponseRedirect
 from rango.models import Category , Page 
@@ -25,7 +25,9 @@ def category(request, category_name_url):
      'category_name_url': category_name_url}
 
     cat_list = get_category_list()
-    context_dict['cat_list'] = cat_list 
+    context_dict['cat_list'] = cat_list
+
+    
 
     try:
         # Can we find a category with the given name?
@@ -47,7 +49,7 @@ def category(request, category_name_url):
         # We get here if we didn't find the specified category.
         # Don't do anything - the template displays the "no category" message for us.
         pass
-    if request.method == POST:
+    if request.method == 'POST':
         query = request.POST['query'].strip()
         if query:
             result_list = run_query(query)
@@ -234,6 +236,7 @@ def index(request):
 
     category_list = Category.objects.all()
     context_dict = {'categories': category_list}
+    
     cat_list = get_category_list()
     context_dict['cat_list'] = cat_list
 
@@ -331,6 +334,22 @@ def profile(request):
     context_dict['user'] = u 
     context_dict['userprofile'] = up
     return render_to_response('rango/profile.html',context_dict, context)
+
+def track_url(request):
+    context = RequestContext(request)
+    page_id = None
+    url = '/rango/'
+    if request.method == 'GET':
+        if 'page_id' in request.GET:
+            page_id = request.GET['page_id']
+            try:
+                page = Page.objects.get(id = page_id)
+                page.views = page.views + 1
+                page.save()
+                url = page.url
+            except:
+                pass
+    return redirect(url) 
 
 
 
