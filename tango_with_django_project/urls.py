@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 admin.autodiscover()
 
 urlpatterns = patterns('',
-	url(r'^$',views.index, name ='index'),
+	url(r'^rango/$',views.index, name ='index'),
 	url(r'^rango/about/$',views.about,name ='about'),
 	url(r'^rango/add_category/$',views.add_category, name ='add_category'),
 	url(r'^rango/category/(?P<category_name_url>\w+)/$',views.category, name ='category'),

@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 def category(request, category_name_url):
     # Request our context from the request passed to us.
     context = RequestContext(request)
+    cat_list = get_category_list()
 
     # Change underscores in the category name to spaces.
     # URLs don't handle spaces well, so we encode them as underscores.
@@ -24,7 +25,7 @@ def category(request, category_name_url):
     context_dict = {'category_name': category_name,
      'category_name_url': category_name_url}
 
-    cat_list = get_category_list()
+    
     context_dict['cat_list'] = cat_list
 
     
